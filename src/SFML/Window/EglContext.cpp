@@ -35,6 +35,7 @@
 #include <SFML/System/Lock.hpp>
 #ifdef SFML_SYSTEM_ANDROID
     #include <SFML/System/Android/Activity.hpp>
+    #include <android/native_window.h>
 #endif
 #ifdef SFML_SYSTEM_LINUX
     #include <X11/Xlib.h>
@@ -129,11 +130,13 @@ m_config  (NULL)
     // Create EGL context
     createContext(shared);
 
-#if !defined(SFML_SYSTEM_ANDROID)
-    // Create EGL surface (except on Android because the window is created
-    // asynchronously, its activity manager will call it for us)
+    // ONB_ANDROID_EGL:
+    // The stock SFML Android path waits for NativeActivity lifecycle events
+    // before creating the EGL window surface. This port uses a custom Java
+    // Activity and native bridge, and states->window is already available.
+    // Create the EGL window surface now so RenderWindow::setActive(true)
+    // succeeds during startup.
     createSurface((EGLNativeWindowType)owner->getSystemHandle());
-#endif
 }
 
 
@@ -193,6 +196,68 @@ void EglContext::display()
 }
 
 
+#ifdef SFML_SYSTEM_ANDROID
+////////////////////////////////////////////////////////////
+bool EglContext::recreateSurface(void* window)
+{
+    if (!window) {
+        err() << "ONB_ANDROID_EGL recreateSurface failed: window=null" << std::endl;
+        return false;
+    }
+
+    if (m_display == EGL_NO_DISPLAY || m_context == EGL_NO_CONTEXT || !m_config) {
+        err() << "ONB_ANDROID_EGL recreateSurface failed: invalid EGL state"
+              << " display=" << m_display
+              << " context=" << m_context
+              << " config=" << m_config
+              << std::endl;
+        return false;
+    }
+
+    EGLSurface oldSurface = m_surface;
+
+    if (eglGetCurrentContext() == m_context) {
+        eglCheck(eglMakeCurrent(
+            m_display,
+            EGL_NO_SURFACE,
+            EGL_NO_SURFACE,
+            EGL_NO_CONTEXT
+        ));
+    }
+
+    if (oldSurface != EGL_NO_SURFACE) {
+        eglCheck(eglDestroySurface(m_display, oldSurface));
+        m_surface = EGL_NO_SURFACE;
+    }
+
+    createSurface((EGLNativeWindowType)window);
+
+    if (m_surface == EGL_NO_SURFACE) {
+        err() << "ONB_ANDROID_EGL recreateSurface failed: createSurface returned EGL_NO_SURFACE" << std::endl;
+        return false;
+    }
+
+    EGLBoolean madeCurrent = eglMakeCurrent(m_display, m_surface, m_surface, m_context);
+
+    EGLint surfaceWidth = 0;
+    EGLint surfaceHeight = 0;
+
+    eglQuerySurface(m_display, m_surface, EGL_WIDTH, &surfaceWidth);
+    eglQuerySurface(m_display, m_surface, EGL_HEIGHT, &surfaceHeight);
+
+    err() << "ONB_ANDROID_EGL recreateSurface"
+          << " window=" << window
+          << " surface=" << m_surface
+          << " size=" << surfaceWidth << "x" << surfaceHeight
+          << " madeCurrent=" << (madeCurrent == EGL_TRUE ? 1 : 0)
+          << " eglError=0x" << std::hex << eglGetError() << std::dec
+          << std::endl;
+
+    return madeCurrent == EGL_TRUE;
+}
+#endif
+
+
 ////////////////////////////////////////////////////////////
 void EglContext::setVerticalSyncEnabled(bool enabled)
 {
@@ -226,7 +291,42 @@ void EglContext::createContext(EglContext* shared)
 ////////////////////////////////////////////////////////////
 void EglContext::createSurface(EGLNativeWindowType window)
 {
+#ifdef SFML_SYSTEM_ANDROID
+    EGLint nativeVisualId = 0;
+    eglCheck(eglGetConfigAttrib(m_display, m_config, EGL_NATIVE_VISUAL_ID, &nativeVisualId));
+
+    int geometryResult = -999;
+
+    if (window && nativeVisualId != 0) {
+        geometryResult = ANativeWindow_setBuffersGeometry(
+            (ANativeWindow*)window,
+            0,
+            0,
+            nativeVisualId
+        );
+    }
+
+    err() << "ONB_ANDROID_EGL surface setup window="
+          << (void*)window
+          << " nativeVisualId=" << nativeVisualId
+          << " geometryResult=" << geometryResult
+          << std::endl;
+#endif
+
     m_surface = eglCheck(eglCreateWindowSurface(m_display, m_config, window, NULL));
+
+#ifdef SFML_SYSTEM_ANDROID
+    EGLint surfaceWidth = 0;
+    EGLint surfaceHeight = 0;
+
+    eglCheck(eglQuerySurface(m_display, m_surface, EGL_WIDTH, &surfaceWidth));
+    eglCheck(eglQuerySurface(m_display, m_surface, EGL_HEIGHT, &surfaceHeight));
+
+    err() << "ONB_ANDROID_EGL window surface created surface="
+          << (void*)m_surface
+          << " size=" << surfaceWidth << "x" << surfaceHeight
+          << std::endl;
+#endif
 }
 
 
@@ -251,7 +351,11 @@ EGLConfig EglContext::getBestConfig(EGLDisplay display, unsigned int bitsPerPixe
         EGL_STENCIL_SIZE, static_cast<EGLint>(settings.stencilBits),
         EGL_SAMPLE_BUFFERS, static_cast<EGLint>(settings.antialiasingLevel),
         EGL_SURFACE_TYPE, EGL_WINDOW_BIT | EGL_PBUFFER_BIT,
+#ifdef SFML_SYSTEM_ANDROID
+        EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
+#else
         EGL_RENDERABLE_TYPE, EGL_OPENGL_ES_BIT,
+#endif
         EGL_NONE
     };
 
@@ -339,3 +443,30 @@ XVisualInfo EglContext::selectBestVisual(::Display* XDisplay, unsigned int bitsP
 } // namespace priv
 
 } // namespace sf
+
+#ifdef SFML_SYSTEM_ANDROID
+extern "C" __attribute__((visibility("default")))
+bool ONBAndroidRecreateSfmlEglSurfaceFromStates()
+{
+    sf::priv::ActivityStates* states = sf::priv::getActivity(NULL);
+
+    if (!states) {
+        sf::err() << "ONB_ANDROID_EGL_RECREATE failed: states=null" << std::endl;
+        return false;
+    }
+
+    sf::Lock lock(states->mutex);
+
+    if (!states->context) {
+        sf::err() << "ONB_ANDROID_EGL_RECREATE failed: context=null" << std::endl;
+        return false;
+    }
+
+    if (!states->window) {
+        sf::err() << "ONB_ANDROID_EGL_RECREATE failed: window=null" << std::endl;
+        return false;
+    }
+
+    return states->context->recreateSurface(states->window);
+}
+#endif

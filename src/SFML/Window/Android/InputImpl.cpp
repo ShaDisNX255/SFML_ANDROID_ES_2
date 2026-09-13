@@ -30,6 +30,7 @@
 #include <SFML/System/Lock.hpp>
 #include <SFML/System/Err.hpp>
 #include <jni.h>
+#include <android/looper.h>
 
 
 namespace sf
@@ -136,7 +137,10 @@ void InputImpl::setVirtualKeyboardVisible(bool visible)
 ////////////////////////////////////////////////////////////
 bool InputImpl::isMouseButtonPressed(Mouse::Button button)
 {
-    ALooper_pollAll(0, NULL, NULL, NULL);
+    if (ALooper_forThread() != NULL)
+    {
+        ALooper_pollAll(0, NULL, NULL, NULL);
+    }
 
     priv::ActivityStates* states = priv::getActivity(NULL);
     Lock lock(states->mutex);
@@ -148,7 +152,10 @@ bool InputImpl::isMouseButtonPressed(Mouse::Button button)
 ////////////////////////////////////////////////////////////
 Vector2i InputImpl::getMousePosition()
 {
-    ALooper_pollAll(0, NULL, NULL, NULL);
+    if (ALooper_forThread() != NULL)
+    {
+        ALooper_pollAll(0, NULL, NULL, NULL);
+    }
 
     priv::ActivityStates* states = priv::getActivity(NULL);
     Lock lock(states->mutex);
@@ -181,7 +188,10 @@ void InputImpl::setMousePosition(const Vector2i& position, const Window& relativ
 ////////////////////////////////////////////////////////////
 bool InputImpl::isTouchDown(unsigned int finger)
 {
-    ALooper_pollAll(0, NULL, NULL, NULL);
+    if (ALooper_forThread() != NULL)
+    {
+        ALooper_pollAll(0, NULL, NULL, NULL);
+    }
 
     priv::ActivityStates* states = priv::getActivity(NULL);
     Lock lock(states->mutex);
@@ -193,7 +203,10 @@ bool InputImpl::isTouchDown(unsigned int finger)
 ////////////////////////////////////////////////////////////
 Vector2i InputImpl::getTouchPosition(unsigned int finger)
 {
-    ALooper_pollAll(0, NULL, NULL, NULL);
+    if (ALooper_forThread() != NULL)
+    {
+        ALooper_pollAll(0, NULL, NULL, NULL);
+    }
 
     priv::ActivityStates* states = priv::getActivity(NULL);
     Lock lock(states->mutex);

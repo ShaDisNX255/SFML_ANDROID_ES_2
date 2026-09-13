@@ -4,20 +4,17 @@
 // Copyright (C) 2013 Jonathan De Wachter (dewachter.jonathan@gmail.com)
 //
 // This software is provided 'as-is', without any express or implied warranty.
-// In no event will the authors be held liable for any damages arising from the use of this software.
+// In no event will the authors be held liable for any damages arising from
+// the use of this software.
 //
 // Permission is granted to anyone to use this software for any purpose,
-// including commercial applications, and to alter it and redistribute it freely,
-// subject to the following restrictions:
+// including commercial applications, and to alter it and redistribute it
+// freely, subject to the following restrictions:
 //
 // 1. The origin of this software must not be misrepresented;
 //    you must not claim that you wrote the original software.
-//    If you use this software in a product, an acknowledgment
-//    in the product documentation would be appreciated but is not required.
-//
-// 2. Altered source versions must be plainly marked as such,
-//    and must not be misrepresented as being the original software.
-//
+// 2. Altered source versions must be plainly marked as such, and must not be
+//    misrepresented as being the original software.
 // 3. This notice may not be removed or altered from any source distribution.
 //
 ////////////////////////////////////////////////////////////
@@ -31,6 +28,7 @@
 #include <SFML/System/Export.hpp>
 #include <SFML/System/InputStream.hpp>
 #include <android/asset_manager.h>
+#include <cstdio>
 #include <string>
 
 
@@ -39,7 +37,7 @@ namespace sf
 namespace priv
 {
 ////////////////////////////////////////////////////////////
-/// \brief Read from Android asset files
+/// \brief Read from Android asset files or regular filesystem paths
 ///
 ////////////////////////////////////////////////////////////
 class SFML_SYSTEM_API ResourceStream : public InputStream
@@ -49,7 +47,7 @@ public:
     ////////////////////////////////////////////////////////////
     /// \brief Default constructor
     ///
-    /// \param filename Filename of the asset
+    /// \param filename Filename of the asset or regular file path
     ///
     ////////////////////////////////////////////////////////////
     ResourceStream(const std::string& filename);
@@ -61,9 +59,9 @@ public:
     ~ResourceStream();
 
     ////////////////////////////////////////////////////////////
-    /// \brief Read data from the asset
+    /// \brief Read data from the stream
     ///
-    /// \param data Buffer where the asset data is copied
+    /// \param data Buffer where the data is copied
     /// \param size Number of bytes read
     ///
     /// \return The number of bytes actually read, or -1 on error
@@ -72,7 +70,7 @@ public:
     Int64 read(void *data, Int64 size);
 
     ////////////////////////////////////////////////////////////
-    /// \brief Change the current reading position in the asset file
+    /// \brief Change the current reading position in the stream
     ///
     /// \param position The position to seek to, from the beginning
     ///
@@ -82,7 +80,7 @@ public:
     Int64 seek(Int64 position);
 
     ////////////////////////////////////////////////////////////
-    /// \brief Get the current reading position in the asset file
+    /// \brief Get the current reading position in the stream
     ///
     /// \return The current position, or -1 on error.
     ///
@@ -90,9 +88,9 @@ public:
     Int64 tell();
 
     ////////////////////////////////////////////////////////////
-    /// \brief Return the size of the asset file
+    /// \brief Return the size of the stream
     ///
-    /// \return The total number of bytes available in the asset, or -1 on error
+    /// \return The total number of bytes available, or -1 on error
     ///
     ////////////////////////////////////////////////////////////
     Int64 getSize();
@@ -102,7 +100,8 @@ private:
     ////////////////////////////////////////////////////////////
     // Member data
     ////////////////////////////////////////////////////////////
-    AAsset* m_file; ///< The asset file to read
+    AAsset* m_file;              ///< APK asset file to read
+    std::FILE* m_regularFile;    ///< Regular filesystem file to read
 };
 
 } // namespace priv

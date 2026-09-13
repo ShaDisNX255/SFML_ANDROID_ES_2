@@ -236,7 +236,6 @@ private:
     static int getUnicode(AInputEvent* event);
 
     Vector2u m_size;
-    bool m_windowBeingCreated;
     bool m_windowBeingDestroyed;
     bool m_hasFocus;
 };

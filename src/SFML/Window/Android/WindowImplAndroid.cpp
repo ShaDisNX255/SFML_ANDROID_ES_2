@@ -47,11 +47,33 @@ namespace sf
 namespace priv
 {
 WindowImplAndroid* WindowImplAndroid::singleInstance = NULL;
+namespace
+{
+    const unsigned int ONB_ANDROID_LOGICAL_WIDTH = 480u;
+    const unsigned int ONB_ANDROID_LOGICAL_HEIGHT = 320u;
+
+    unsigned int ONBAndroidGetSurfaceWidthUnlocked(ActivityStates* states)
+    {
+        if (!states || !states->window)
+            return 0u;
+
+        int width = ANativeWindow_getWidth(states->window);
+        return width > 0 ? static_cast<unsigned int>(width) : 0u;
+    }
+
+    unsigned int ONBAndroidGetSurfaceHeightUnlocked(ActivityStates* states)
+    {
+        if (!states || !states->window)
+            return 0u;
+
+        int height = ANativeWindow_getHeight(states->window);
+        return height > 0 ? static_cast<unsigned int>(height) : 0u;
+    }
+}
 
 ////////////////////////////////////////////////////////////
 WindowImplAndroid::WindowImplAndroid(WindowHandle handle)
 : m_size(0, 0)
-, m_windowBeingCreated(false)
 , m_windowBeingDestroyed(false)
 , m_hasFocus(false)
 {
@@ -60,24 +82,64 @@ WindowImplAndroid::WindowImplAndroid(WindowHandle handle)
 
 ////////////////////////////////////////////////////////////
 WindowImplAndroid::WindowImplAndroid(VideoMode mode, const String& title, unsigned long style, const ContextSettings& settings)
-: m_size(mode.width, mode.height)
-, m_windowBeingCreated(false)
+: m_size(ONB_ANDROID_LOGICAL_WIDTH, ONB_ANDROID_LOGICAL_HEIGHT)
 , m_windowBeingDestroyed(false)
 , m_hasFocus(false)
 {
     ActivityStates* states = getActivity(NULL);
-    Lock lock(states->mutex);
 
-    if (style& Style::Fullscreen)
-        states->fullscreen = true;
+    {
+        Lock lock(states->mutex);
 
-    WindowImplAndroid::singleInstance = this;
-    states->forwardEvent = forwardEvent;
+        if (style & Style::Fullscreen)
+            states->fullscreen = true;
 
-    // Register process event callback
-    states->processEvent = processEvent;
+        WindowImplAndroid::singleInstance = this;
+        states->forwardEvent = forwardEvent;
 
-    states->initialized = true;
+        // Register process event callback
+        states->processEvent = processEvent;
+
+        states->initialized = true;
+    }
+
+    // ONB_ANDROID_EGL:
+    // The custom Java Activity passes a SurfaceView-backed ANativeWindow
+    // before game main() creates the SFML window. Wait until it is visible
+    // here, then let EglContext create the EGL surface immediately.
+    while (true)
+    {
+        {
+            Lock lock(states->mutex);
+
+            if (states->window != NULL)
+                break;
+        }
+
+        ALooper_pollOnce(0, NULL, NULL, NULL);
+    }
+
+    {
+        Lock lock(states->mutex);
+
+        unsigned int surfaceWidth = ONBAndroidGetSurfaceWidthUnlocked(states);
+        unsigned int surfaceHeight = ONBAndroidGetSurfaceHeightUnlocked(states);
+
+        // Android breadcrumb:
+        // Keep SFML's public RenderWindow size logical at 480x320 so Swoosh
+        // and game scenes do not lay out against the physical phone surface.
+        // RenderTarget.cpp will still use the real ANativeWindow size for the
+        // GLES viewport.
+        m_size.x = ONB_ANDROID_LOGICAL_WIDTH;
+        m_size.y = ONB_ANDROID_LOGICAL_HEIGHT;
+        m_hasFocus = true;
+
+        err() << "ONB_ANDROID_WINDOW_IMPL logicalSize="
+              << m_size.x << "x" << m_size.y
+              << " physicalSurface=" << surfaceWidth << "x" << surfaceHeight
+              << " requestedMode=" << mode.width << "x" << mode.height
+              << std::endl;
+    }
 }
 
 
@@ -98,19 +160,93 @@ WindowHandle WindowImplAndroid::getSystemHandle() const
 
 
 ////////////////////////////////////////////////////////////
+#if defined(__clang__) || defined(__GNUC__)
+#define ONB_ANDROID_EXPORT __attribute__((visibility("default")))
+#else
+#define ONB_ANDROID_EXPORT
+#endif
+
+extern "C" ONB_ANDROID_EXPORT bool ONBAndroidWindowImplRecreateSurfaceFromStates()
+{
+    ActivityStates* states = getActivity(NULL);
+
+    if (!states)
+    {
+        err() << "ONB_ANDROID_EGL_RECREATE failed in sfml-window: ActivityStates is null"
+              << std::endl;
+
+        return false;
+    }
+
+    EglContext* context = NULL;
+    void* window = NULL;
+    Vector2i screenSize;
+
+    {
+        Lock lock(states->mutex);
+
+        context = states->context;
+        window = states->window;
+        screenSize = states->screenSize;
+    }
+
+    if (!context)
+    {
+        err() << "ONB_ANDROID_EGL_RECREATE failed in sfml-window: states->context is null"
+              << std::endl;
+
+        return false;
+    }
+
+    if (!window)
+    {
+        err() << "ONB_ANDROID_EGL_RECREATE failed in sfml-window: states->window is null"
+              << std::endl;
+
+        return false;
+    }
+
+    err() << "ONB_ANDROID_EGL_RECREATE sfml-window begin window="
+          << window
+          << " size=" << screenSize.x << "x" << screenSize.y
+          << std::endl;
+
+    const bool recreated = context->recreateSurface(window);
+
+    {
+        Lock lock(states->mutex);
+        states->updated = true;
+    }
+
+    err() << "ONB_ANDROID_EGL_RECREATE sfml-window "
+          << (recreated ? "success" : "failed")
+          << " window=" << window
+          << " size=" << screenSize.x << "x" << screenSize.y
+          << std::endl;
+
+    return recreated;
+}
+
+#undef ONB_ANDROID_EXPORT
+
+
+////////////////////////////////////////////////////////////
 void WindowImplAndroid::processEvents()
 {
-    // Process incoming OS events
-    ALooper_pollAll(0, NULL, NULL, NULL);
+    // ONB_ANDROID_BRIDGE:
+    // The Java SurfaceView bridge owns Android input/lifecycle now.
+    // SFML may call processEvents() from ONB's render thread, which does not
+    // always have an Android Looper. Calling ALooper_pollAll() there spams:
+    // "ALooper_pollAll: No looper for this thread!"
+    //
+    // Only poll Android's native looper when this thread actually has one.
+    if (ALooper_forThread() != NULL)
+    {
+        ALooper_pollAll(0, NULL, NULL, NULL);
+    }
 
     ActivityStates* states = getActivity(NULL);
     sf::Lock lock(states->mutex);
-
-    if (m_windowBeingCreated)
-    {
-        states->context->createSurface(states->window);
-        m_windowBeingCreated = false;
-    }
 
     if (m_windowBeingDestroyed)
     {
@@ -216,18 +352,24 @@ bool WindowImplAndroid::hasFocus() const
 ////////////////////////////////////////////////////////////
 void WindowImplAndroid::forwardEvent(const Event& event)
 {
-    ActivityStates* states = getActivity(NULL);
+    if (!WindowImplAndroid::singleInstance)
+        return;
 
     if (event.type == Event::GainedFocus)
     {
-        WindowImplAndroid::singleInstance->m_size.x = ANativeWindow_getWidth(states->window);
-        WindowImplAndroid::singleInstance->m_size.y = ANativeWindow_getHeight(states->window);
-        WindowImplAndroid::singleInstance->m_windowBeingCreated = true;
+        WindowImplAndroid::singleInstance->m_size.x = ONB_ANDROID_LOGICAL_WIDTH;
+        WindowImplAndroid::singleInstance->m_size.y = ONB_ANDROID_LOGICAL_HEIGHT;
         WindowImplAndroid::singleInstance->m_hasFocus = true;
     }
     else if (event.type == Event::LostFocus)
     {
-        WindowImplAndroid::singleInstance->m_windowBeingDestroyed = true;
+        // ONB_ANDROID_EGL:
+        // Android focus loss is not the same thing as SurfaceView destruction.
+        // Pulling the notification shade sends LostFocus while the ANativeWindow
+        // can still be valid. Do not destroy the EGL surface here.
+        // Actual surface pause/destruction is handled by nativePauseGame()
+        // marking gOnbSurfaceActive=false, and resume is handled through
+        // nativeResizeGame() queuing ONB_ANDROID_EGL_RECREATE.
         WindowImplAndroid::singleInstance->m_hasFocus = false;
     }
 

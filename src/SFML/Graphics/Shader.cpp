@@ -40,6 +40,7 @@
 #include <vector>
 #ifdef SFML_SYSTEM_ANDROID
 #include <SFML/System/Android/ResourceStream.hpp>
+#include <android/log.h>
 #endif
 
 
@@ -59,6 +60,21 @@ namespace
 {
     sf::Mutex maxTextureUnitsMutex;
     sf::Mutex isAvailableMutex;
+
+#ifdef SFML_SYSTEM_ANDROID
+    void onbAndroidShaderLog(const char* stage, const char* log)
+    {
+        __android_log_print(
+            ANDROID_LOG_ERROR,
+            "OpenNetBattle",
+            "ONB_ANDROID_SFML_SHADER %s: %s",
+            stage ? stage : "unknown",
+            log ? log : ""
+        );
+    }
+#else
+    void onbAndroidShaderLog(const char*, const char*) {}
+#endif
 
     void destroyProgram(unsigned int program)
     {
@@ -901,6 +917,7 @@ bool Shader::compile(const char* vertexShaderCode, const char* geometryShaderCod
             glCheck(GLEXT_glGetShaderInfoLog(vertexShader, sizeof(log), 0, log));
             err() << "Failed to compile vertex shader:" << std::endl
                   << log << std::endl;
+            onbAndroidShaderLog("compile vertex failed", log);
             glCheck(GLEXT_glDeleteShader(vertexShader));
             glCheck(GLEXT_glDeleteProgram(shaderProgram));
             return false;
@@ -928,6 +945,7 @@ bool Shader::compile(const char* vertexShaderCode, const char* geometryShaderCod
             glCheck(GLEXT_glGetShaderInfoLog(geometryShader, sizeof(log), 0, log));
             err() << "Failed to compile geometry shader:" << std::endl
                   << log << std::endl;
+            onbAndroidShaderLog("compile geometry failed", log);
             glCheck(GLEXT_glDeleteShader(geometryShader));
             glCheck(GLEXT_glDeleteProgram(shaderProgram));
             return false;
@@ -956,6 +974,7 @@ bool Shader::compile(const char* vertexShaderCode, const char* geometryShaderCod
             glCheck(GLEXT_glGetShaderInfoLog(fragmentShader, sizeof(log), 0, log));
             err() << "Failed to compile fragment shader:" << std::endl
                   << log << std::endl;
+            onbAndroidShaderLog("compile fragment failed", log);
             glCheck(GLEXT_glDeleteShader(fragmentShader));
             glCheck(GLEXT_glDeleteProgram(shaderProgram));
             return false;
@@ -978,6 +997,7 @@ bool Shader::compile(const char* vertexShaderCode, const char* geometryShaderCod
         glCheck(GLEXT_glGetProgramInfoLog(shaderProgram, sizeof(log), 0, log));
         err() << "Failed to link shader:" << std::endl
               << log << std::endl;
+        onbAndroidShaderLog("link failed", log);
         glCheck(GLEXT_glDeleteProgram(shaderProgram));
         return false;
     }

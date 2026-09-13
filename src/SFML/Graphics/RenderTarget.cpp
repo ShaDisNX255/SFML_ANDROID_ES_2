@@ -41,6 +41,10 @@
 #include <algorithm>
 #include <map>
 
+#if defined(__ANDROID__) || defined(ANDROID)
+#include <EGL/egl.h>
+#endif
+
 
 // GL_QUADS is unavailable on OpenGL ES, thus we need to define GL_QUADS ourselves
 #ifdef SFML_OPENGL_ES
@@ -70,6 +74,10 @@ namespace
     // has been activated within a single context
     typedef std::map<sf::Uint64, sf::Uint64> ContextRenderTargetMap;
     ContextRenderTargetMap contextRenderTargetMap;
+
+#if defined(SFML_OPENGL_ES) || defined(__ANDROID__) || defined(ANDROID)
+    sf::Shader* androidGlobalDefaultShader = NULL;
+#endif
 
     // Check if a RenderTarget with the given ID is active in the current context
     bool isActive(sf::Uint64 id)
@@ -121,6 +129,27 @@ namespace
     }
 }
 
+#if defined(SFML_OPENGL_ES) || defined(__ANDROID__) || defined(ANDROID)
+
+#if defined(__clang__) || defined(__GNUC__)
+#define ONB_ANDROID_EXPORT __attribute__((visibility("default")))
+#else
+#define ONB_ANDROID_EXPORT
+#endif
+
+extern "C" ONB_ANDROID_EXPORT void ONBAndroidSetGlobalDefaultSfmlShader(sf::Shader* shader)
+{
+    androidGlobalDefaultShader = shader;
+
+    sf::err() << "ONB_ANDROID_RENDER global default shader set ptr="
+              << static_cast<void*>(shader)
+              << std::endl;
+}
+
+#undef ONB_ANDROID_EXPORT
+
+#endif
+
 
 namespace sf
 {
@@ -129,7 +158,8 @@ RenderTarget::RenderTarget() :
 m_defaultView(),
 m_view       (),
 m_cache      (),
-m_id         (0)
+m_id         (0),
+m_defaultShader(NULL)
 {
     m_cache.glStatesSet = false;
 }
@@ -258,6 +288,41 @@ void RenderTarget::draw(const Vertex* vertices, std::size_t vertexCount,
             return;
         }
     #endif
+
+#ifdef SFML_OPENGL_ES
+    if (!states.shader && !m_defaultShader && androidGlobalDefaultShader)
+    {
+        m_defaultShader = androidGlobalDefaultShader;
+
+        static bool loggedAdoptedGlobalDefaultShader = false;
+
+        if (!loggedAdoptedGlobalDefaultShader)
+        {
+            err() << "ONB_ANDROID_RENDER adopted global default shader for vertex draw"
+                  << " target=" << this
+                  << " size=" << getSize().x << "x" << getSize().y
+                  << " shader=" << static_cast<void*>(m_defaultShader)
+                  << std::endl;
+            loggedAdoptedGlobalDefaultShader = true;
+        }
+    }
+
+    if (!states.shader && !m_defaultShader)
+    {
+        static bool warnedNoDefaultShader = false;
+
+        if (!warnedNoDefaultShader)
+        {
+            err() << "ONB_ANDROID_RENDER draw skipped because no default shader is assigned"
+                  << " target=" << this
+                  << " size=" << getSize().x << "x" << getSize().y
+                  << std::endl;
+            warnedNoDefaultShader = true;
+        }
+
+        return;
+    }
+#endif
 
     if (isActive(m_id) || setActive(true))
     {
@@ -441,6 +506,41 @@ void RenderTarget::draw(const VertexBuffer& vertexBuffer, std::size_t firstVerte
             return;
         }
     #endif
+
+#ifdef SFML_OPENGL_ES
+    if (!states.shader && !m_defaultShader && androidGlobalDefaultShader)
+    {
+        m_defaultShader = androidGlobalDefaultShader;
+
+        static bool loggedAdoptedGlobalDefaultShader = false;
+
+        if (!loggedAdoptedGlobalDefaultShader)
+        {
+            err() << "ONB_ANDROID_RENDER adopted global default shader for vertex buffer draw"
+                  << " target=" << this
+                  << " size=" << getSize().x << "x" << getSize().y
+                  << " shader=" << static_cast<void*>(m_defaultShader)
+                  << std::endl;
+            loggedAdoptedGlobalDefaultShader = true;
+        }
+    }
+
+    if (!states.shader && !m_defaultShader)
+    {
+        static bool warnedNoDefaultShader = false;
+
+        if (!warnedNoDefaultShader)
+        {
+            err() << "ONB_ANDROID_RENDER vertex buffer draw skipped because no default shader is assigned"
+                  << " target=" << this
+                  << " size=" << getSize().x << "x" << getSize().y
+                  << std::endl;
+            warnedNoDefaultShader = true;
+        }
+
+        return;
+    }
+#endif
 
     if (isActive(m_id) || setActive(true))
     {
@@ -670,13 +770,149 @@ void RenderTarget::applyCurrentView(const RenderStates& states)
 {
     // Set the viewport
     IntRect viewport = getViewport(m_view);
+
+#ifdef SFML_OPENGL_ES
+#if defined(__ANDROID__) || defined(ANDROID)
+    bool usedAndroidPhysicalViewport = false;
+
+    GLint boundFramebuffer = -1;
+    glGetIntegerv(GL_FRAMEBUFFER_BINDING, &boundFramebuffer);
+
+    // Only override the viewport for the real Android window framebuffer.
+    // RenderTextures/FBOs must keep their own logical FBO size.
+    if (boundFramebuffer == 0)
+    {
+        const unsigned int logicalWidth = getSize().x;
+        const unsigned int logicalHeight = getSize().y;
+
+        unsigned int surfaceWidth = 0u;
+        unsigned int surfaceHeight = 0u;
+
+#if defined(__ANDROID__) || defined(ANDROID)
+        EGLDisplay eglDisplay = eglGetCurrentDisplay();
+        EGLSurface eglSurface = eglGetCurrentSurface(EGL_DRAW);
+
+        if (eglDisplay != EGL_NO_DISPLAY && eglSurface != EGL_NO_SURFACE)
+        {
+            EGLint eglWidth = 0;
+            EGLint eglHeight = 0;
+
+            if (eglQuerySurface(eglDisplay, eglSurface, EGL_WIDTH, &eglWidth) &&
+                eglQuerySurface(eglDisplay, eglSurface, EGL_HEIGHT, &eglHeight) &&
+                eglWidth > 0 &&
+                eglHeight > 0)
+            {
+                surfaceWidth = static_cast<unsigned int>(eglWidth);
+                surfaceHeight = static_cast<unsigned int>(eglHeight);
+            }
+        }
+#endif
+
+        if (logicalWidth > 0u &&
+            logicalHeight > 0u &&
+            surfaceWidth > 0u &&
+            surfaceHeight > 0u)
+        {
+            const float surfaceRatio =
+                static_cast<float>(surfaceWidth) / static_cast<float>(surfaceHeight);
+
+            const float viewRatio =
+                m_view.getSize().x / m_view.getSize().y;
+
+            float baseWidth = static_cast<float>(surfaceWidth);
+            float baseHeight = static_cast<float>(surfaceHeight);
+            float baseLeft = 0.f;
+            float baseTop = 0.f;
+
+            if (surfaceRatio > viewRatio)
+            {
+                baseWidth = static_cast<float>(surfaceHeight) * viewRatio;
+                baseLeft = (static_cast<float>(surfaceWidth) - baseWidth) * 0.5f;
+            }
+            else
+            {
+                baseHeight = static_cast<float>(surfaceWidth) / viewRatio;
+                baseTop = (static_cast<float>(surfaceHeight) - baseHeight) * 0.5f;
+            }
+
+            const FloatRect& viewPortRatio = m_view.getViewport();
+
+            const int physicalLeft = static_cast<int>(0.5f + baseLeft + baseWidth * viewPortRatio.left);
+            const int physicalTop = static_cast<int>(0.5f + baseTop + baseHeight * viewPortRatio.top);
+            const int physicalWidth = static_cast<int>(0.5f + baseWidth * viewPortRatio.width);
+            const int physicalHeight = static_cast<int>(0.5f + baseHeight * viewPortRatio.height);
+
+            const int glTop =
+                static_cast<int>(surfaceHeight) - (physicalTop + physicalHeight);
+
+            glCheck(glViewport(
+                physicalLeft,
+                glTop,
+                physicalWidth,
+                physicalHeight
+            ));
+
+            static unsigned int loggedAndroidViewportCount = 0;
+            ++loggedAndroidViewportCount;
+
+            if (loggedAndroidViewportCount <= 5 ||
+                (loggedAndroidViewportCount % 300u) == 0u)
+            {
+                err() << "ONB_ANDROID_RENDER physical viewport logical="
+                      << logicalWidth << "x" << logicalHeight
+                      << " surface=" << surfaceWidth << "x" << surfaceHeight
+                      << " viewport=" << physicalLeft << ","
+                      << glTop << ","
+                      << physicalWidth << ","
+                      << physicalHeight
+                      << std::endl;
+            }
+
+            usedAndroidPhysicalViewport = true;
+        }
+    }
+
+    if (!usedAndroidPhysicalViewport)
+#endif
+    {
+        int top = getSize().y - (viewport.top + viewport.height);
+        glCheck(glViewport(viewport.left, top, viewport.width, viewport.height));
+    }
+#else
     int top = getSize().y - (viewport.top + viewport.height);
     glCheck(glViewport(viewport.left, top, viewport.width, viewport.height));
+#endif
 
     // Set the projection matrix
 #ifdef SFML_OPENGL_ES
-        sf::Shader* shader = states.shader ? states.shader : m_defaultShader;
-        shader->setUniform("projMatrix", Glsl::Mat4(m_view.getTransform().getMatrix()));
+    sf::Shader* shader = states.shader ? states.shader : m_defaultShader;
+
+#if defined(__ANDROID__) || defined(ANDROID)
+    if (!shader && androidGlobalDefaultShader)
+    {
+        m_defaultShader = androidGlobalDefaultShader;
+        shader = m_defaultShader;
+    }
+
+    if (!shader)
+    {
+        static bool warnedNoShaderForView = false;
+
+        if (!warnedNoShaderForView)
+        {
+            err() << "ONB_ANDROID_RENDER applyCurrentView skipped because no shader is assigned"
+                  << " target=" << this
+                  << " size=" << getSize().x << "x" << getSize().y
+                  << std::endl;
+
+            warnedNoShaderForView = true;
+        }
+
+        return;
+    }
+#endif
+
+    shader->setUniform("projMatrix", Glsl::Mat4(m_view.getTransform().getMatrix()));
 #else
     glCheck(glMatrixMode(GL_PROJECTION));
     glCheck(glLoadMatrixf(m_view.getTransform().getMatrix()));
@@ -780,10 +1016,73 @@ void RenderTarget::setupDraw(bool useVertexCache, const RenderStates& states)
 
 #ifdef SFML_OPENGL_ES
         sf::Shader* shader = states.shader ? states.shader : m_defaultShader;
+
+#if defined(__ANDROID__) || defined(ANDROID)
+        if (!shader && androidGlobalDefaultShader)
+        {
+            m_defaultShader = androidGlobalDefaultShader;
+            shader = m_defaultShader;
+        }
+
+        if (!shader)
+        {
+            static bool warnedNoShaderForSetupDraw = false;
+
+            if (!warnedNoShaderForSetupDraw)
+            {
+                err() << "ONB_ANDROID_RENDER setupDraw skipped because no shader is assigned"
+                      << " target=" << this
+                      << " size=" << getSize().x << "x" << getSize().y
+                      << std::endl;
+
+                warnedNoShaderForSetupDraw = true;
+            }
+
+            return;
+        }
+#endif
+
         applyShader(shader);
 
-        if(states.texture) {
+        if (states.texture) {
             shader->setUniform("textMatrix", states.texture->getMatrix(Texture::Pixels));
+            shader->setUniform("repeatTexture", states.texture->m_isRepeated ? 1 : 0);
+
+            shader->setUniform(
+                "textureLogicalSize",
+                Glsl::Vec2(
+                    static_cast<float>(states.texture->m_size.x),
+                    static_cast<float>(states.texture->m_size.y)
+                )
+            );
+
+            shader->setUniform(
+                "textureActualSize",
+                Glsl::Vec2(
+                    static_cast<float>(states.texture->m_actualSize.x),
+                    static_cast<float>(states.texture->m_actualSize.y)
+                )
+            );
+
+#if defined(__ANDROID__) || defined(ANDROID)
+            static bool loggedTextureSizeUniforms = false;
+
+            if (states.texture->m_isRepeated && !loggedTextureSizeUniforms)
+            {
+                err() << "ONB_ANDROID_TEXTURE_REPEAT shader texture sizes"
+                      << " logical=" << states.texture->m_size.x << "x" << states.texture->m_size.y
+                      << " actual=" << states.texture->m_actualSize.x << "x" << states.texture->m_actualSize.y
+                      << std::endl;
+
+                loggedTextureSizeUniforms = true;
+            }
+#endif
+        }
+        else {
+            shader->setUniform("textMatrix", Glsl::Mat4(Transform::Identity.getMatrix()));
+            shader->setUniform("repeatTexture", 0);
+            shader->setUniform("textureLogicalSize", Glsl::Vec2(1.f, 1.f));
+            shader->setUniform("textureActualSize", Glsl::Vec2(1.f, 1.f));
         }
 #else
         // Apply the shader

@@ -139,6 +139,10 @@ public:
     ////////////////////////////////////////////////////////////
     void destroySurface();
 
+#ifdef SFML_SYSTEM_ANDROID
+    bool recreateSurface(void* window);
+#endif
+
     ////////////////////////////////////////////////////////////
     /// \brief Get the best EGL visual for a given set of video settings
     ///
