@@ -34,8 +34,13 @@
 #include <SFML/System/Mutex.hpp>
 #include <SFML/System/Lock.hpp>
 #include <SFML/System/Err.hpp>
+#include <algorithm>
 #include <cassert>
 #include <cstring>
+
+#ifdef SFML_SYSTEM_ANDROID
+#include <android/log.h>
+#endif
 
 
 namespace
@@ -349,6 +354,47 @@ Image Texture::copyToImage() const
         glCheck(GLEXT_glDeleteFramebuffers(1, &frameBuffer));
 
         glCheck(GLEXT_glBindFramebuffer(GLEXT_GL_FRAMEBUFFER, previousFrameBuffer));
+
+        // RenderTexture contents are stored vertically flipped.
+        // Desktop SFML compensates for this during texture copies, but the
+        // OpenGL ES path must normalize the rows manually after glReadPixels.
+        if (m_pixelsFlipped)
+        {
+            const std::size_t rowSize = static_cast<std::size_t>(m_size.x) * 4u;
+
+            for (unsigned int y = 0; y < m_size.y / 2; ++y)
+            {
+                std::vector<Uint8>::iterator topRow =
+                    pixels.begin() + static_cast<std::size_t>(y) * rowSize;
+
+                std::vector<Uint8>::iterator bottomRow =
+                    pixels.begin() +
+                    static_cast<std::size_t>(m_size.y - 1u - y) * rowSize;
+
+                std::swap_ranges(
+                    topRow,
+                    topRow + rowSize,
+                    bottomRow
+                );
+            }
+
+#ifdef SFML_SYSTEM_ANDROID
+            static bool loggedFlippedTextureReadback = false;
+
+            if (!loggedFlippedTextureReadback)
+            {
+                __android_log_print(
+                    ANDROID_LOG_INFO,
+                    "OpenNetBattle",
+                    "ONB_ANDROID_TEXTURE normalized vertically flipped GLES texture readback size=%ux%u",
+                    m_size.x,
+                    m_size.y
+                );
+
+                loggedFlippedTextureReadback = true;
+            }
+#endif
+        }
     }
 
 #else
