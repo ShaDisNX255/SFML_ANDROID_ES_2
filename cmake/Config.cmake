@@ -60,6 +60,14 @@ elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Android")
 
     # use the OpenGL ES implementation on Android
     set(OPENGL_ES 1)
+elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
+    set(SFML_OS_EMSCRIPTEN 1)
+
+    # Emscripten exposes WebGL through an OpenGL ES-style API
+    set(OPENGL_ES 1)
+
+    message(STATUS "[ONB_WEB_GL] SFML platform: Emscripten")
+    message(STATUS "[ONB_WEB_GL] SFML OpenGL ES backend enabled")
 # comparing CMAKE_SYSTEM_NAME with "CYGWIN" generates a false warning depending on the CMake version
 # let's avoid it so the actual error is more visible
 elseif(${CYGWIN})
