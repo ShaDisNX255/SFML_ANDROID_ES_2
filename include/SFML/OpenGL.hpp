@@ -76,6 +76,12 @@
     //#include <GLES2/gl2platform.h>
     //#include <GLES2/gl2ext.h>
 
+#elif defined (SFML_SYSTEM_EMSCRIPTEN)
+
+    // WebGL 1 is exposed by Emscripten through the OpenGL ES 2 API.
+    #include <GLES2/gl2.h>
+    #include <GLES2/gl2ext.h>
+
 #endif
 
 

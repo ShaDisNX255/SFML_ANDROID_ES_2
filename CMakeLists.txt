@@ -88,7 +88,7 @@ if(SFML_OS_MACOSX)
     sfml_set_option(SFML_DEPENDENCIES_INSTALL_PREFIX "/Library/Frameworks" PATH "External frameworks (FLAC, Freetype, Vorbis, ...) installation directory")
 
     # add an option to automatically install Xcode templates
-    sfml_set_option(SFML_INSTALL_XCODE_TEMPLATES FALSE BOOL "TRUE to automatically install the Xcode templates, FALSE to do nothing about it. The templates are compatible with Xcode 4 and 5.")
+    sfml_set_option(SFML_INSTALL_XCODE_TEMPLATES FALSE BOOL "TRUE to automatically install Xcode templates, FALSE to do nothing. The templates are compatible with Xcode 4 and 5.")
 else()
     # add an option to let the user specify a custom directory for external libraries installation
     sfml_set_option(SFML_DEPENDENCIES_INSTALL_PREFIX "." PATH "External libraries (FLAC, Freetype, Vorbis, ...) installation directory")
@@ -141,6 +141,9 @@ elseif(SFML_OS_MACOSX)
     set(DEFAULT_INSTALL_MISC_DIR /usr/local/share/SFML)
 elseif(SFML_OS_ANDROID)
     set(DEFAULT_INSTALL_MISC_DIR ${CMAKE_ANDROID_NDK}/sources/third_party/sfml)
+elseif(SFML_OS_EMSCRIPTEN)
+    set(DEFAULT_INSTALL_MISC_DIR share/SFML)
+    message(STATUS "[ONB_WEB_BOOT] SFML miscellaneous install directory: ${DEFAULT_INSTALL_MISC_DIR}")
 endif()
 # add an option to let the user specify a custom directory for doc, examples, licence, readme and other miscellaneous files
 sfml_set_option(SFML_MISC_INSTALL_PREFIX "${DEFAULT_INSTALL_MISC_DIR}" PATH "Prefix installation path for miscellaneous files")

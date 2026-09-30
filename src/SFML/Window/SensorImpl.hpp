@@ -51,6 +51,11 @@
 
     #include <SFML/Window/Android/SensorImpl.hpp>
 
+#elif defined(SFML_SYSTEM_EMSCRIPTEN)
+
+    // Reuse the existing unsupported/no-op sensor implementation.
+    #include <SFML/Window/Unix/SensorImpl.hpp>
+
 #endif
 
 

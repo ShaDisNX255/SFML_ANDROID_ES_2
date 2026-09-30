@@ -106,6 +106,11 @@ struct JoystickState
 
     #include <SFML/Window/Android/JoystickImpl.hpp>
 
+#elif defined(SFML_SYSTEM_EMSCRIPTEN)
+
+    // Gamepad support is intentionally deferred for the browser PoC.
+    #include <SFML/Window/Android/JoystickImpl.hpp>
+
 #endif
 
 

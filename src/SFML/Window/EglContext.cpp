@@ -64,6 +64,18 @@ namespace
 
     return states->display;
 
+#elif defined(SFML_SYSTEM_EMSCRIPTEN)
+
+    static EGLDisplay display = EGL_NO_DISPLAY;
+
+    if (display == EGL_NO_DISPLAY)
+    {
+        display = eglCheck(eglGetDisplay(EGL_DEFAULT_DISPLAY));
+        eglCheck(eglInitialize(display, NULL, NULL));
+    }
+
+    return display;
+
 #endif
     }
 }
@@ -314,7 +326,6 @@ XVisualInfo EglContext::selectBestVisual(::Display* XDisplay, unsigned int bitsP
     XVisualInfo vTemplate;
     vTemplate.visualid = static_cast<VisualID>(nativeVisualId);
 
-    // Get X11 visuals compatible with this EGL config
     XVisualInfo *availableVisuals, bestVisual;
     int visualCount = 0;
 
@@ -322,13 +333,11 @@ XVisualInfo EglContext::selectBestVisual(::Display* XDisplay, unsigned int bitsP
 
     if (visualCount == 0)
     {
-        // Can't happen...
         err() << "No X11 visual found. Bug in your EGL implementation ?" << std::endl;
 
         return XVisualInfo();
     }
 
-    // Pick up the best one
     bestVisual = availableVisuals[0];
     XFree(availableVisuals);
 

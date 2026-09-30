@@ -222,6 +222,27 @@ elseif(SFML_OS_ANDROID)
         ${SRCROOT}/Android/SensorImpl.cpp
     )
     source_group("android" FILES ${PLATFORM_SRC})
+elseif(SFML_OS_EMSCRIPTEN)
+    set(PLATFORM_SRC
+        ${SRCROOT}/Emscripten/WindowImplEmscripten.hpp
+        ${SRCROOT}/Emscripten/WindowImplEmscripten.cpp
+        ${SRCROOT}/Emscripten/VideoModeImpl.cpp
+        ${SRCROOT}/Emscripten/InputImpl.hpp
+        ${SRCROOT}/Emscripten/InputImpl.cpp
+
+        ${SRCROOT}/Android/CursorImpl.hpp
+        ${SRCROOT}/Android/CursorImpl.cpp
+        ${SRCROOT}/Android/ClipboardImpl.hpp
+        ${SRCROOT}/Android/ClipboardImpl.cpp
+        ${SRCROOT}/Android/JoystickImpl.hpp
+        ${SRCROOT}/Android/JoystickImpl.cpp
+
+        ${SRCROOT}/Unix/SensorImpl.hpp
+        ${SRCROOT}/Unix/SensorImpl.cpp
+    )
+    source_group("emscripten" FILES ${PLATFORM_SRC})
+
+    message(STATUS "[ONB_WEB_GL] SFML Emscripten window backend enabled")
 endif()
 
 # define the sfml-window target

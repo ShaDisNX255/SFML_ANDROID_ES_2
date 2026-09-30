@@ -50,6 +50,11 @@
 
     #include <SFML/Window/Android/CursorImpl.hpp>
 
+#elif defined(SFML_SYSTEM_EMSCRIPTEN)
+
+    // Reuse the existing unsupported/no-op cursor implementation for now.
+    #include <SFML/Window/Android/CursorImpl.hpp>
+
 #endif
 
 

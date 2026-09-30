@@ -40,6 +40,9 @@
     #include <SFML/Window/iOS/ClipboardImpl.hpp>
 #elif defined(SFML_SYSTEM_ANDROID)
     #include <SFML/Window/Android/ClipboardImpl.hpp>
+#elif defined(SFML_SYSTEM_EMSCRIPTEN)
+    // Clipboard support is intentionally deferred for the browser PoC.
+    #include <SFML/Window/Android/ClipboardImpl.hpp>
 #endif
 
 #endif // SFML_CLIPBOARDIMPL_HPP
