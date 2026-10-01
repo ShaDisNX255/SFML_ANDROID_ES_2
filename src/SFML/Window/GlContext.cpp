@@ -213,53 +213,77 @@ namespace
     std::vector<std::string> extensions;
 
     // Load our extensions vector with the supported extensions
-    void loadExtensions()
+void loadExtensions()
+{
+    extensions.clear();
+
+#if defined(SFML_SYSTEM_EMSCRIPTEN)
+
+    // WebGL 1 / GLES2 does not support querying GL_MAJOR_VERSION.
+    // Use the legacy extension string directly.
+    const char* extensionString = reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS));
+
+    if (!extensionString)
+        return;
+
+    do
     {
-        extensions.clear();
+        const char* extension = extensionString;
 
-        // Check whether a >= 3.0 context is available
-        int majorVersion = 0;
-        glGetIntegerv(GL_MAJOR_VERSION, &majorVersion);
+        while (*extensionString && (*extensionString != ' '))
+            extensionString++;
 
-        if (glGetError() == GL_INVALID_ENUM)
+        extensions.push_back(std::string(extension, extensionString));
+    }
+    while (*extensionString++);
+
+#else
+
+    // Check whether a >= 3.0 context is available
+    int majorVersion = 0;
+    glGetIntegerv(GL_MAJOR_VERSION, &majorVersion);
+
+    if (glGetError() == GL_INVALID_ENUM)
+    {
+        // Try to load the < 3.0 way
+        const char* extensionString = reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS));
+
+        do
         {
-            // Try to load the < 3.0 way
-            const char* extensionString = reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS));
+            const char* extension = extensionString;
 
-            do
-            {
-                const char* extension = extensionString;
+            while (*extensionString && (*extensionString != ' '))
+                extensionString++;
 
-                while (*extensionString && (*extensionString != ' '))
-                    extensionString++;
-
-                extensions.push_back(std::string(extension, extensionString));
-            }
-            while (*extensionString++);
+            extensions.push_back(std::string(extension, extensionString));
         }
-        else
+        while (*extensionString++);
+    }
+    else
+    {
+        // Try to load the >= 3.0 way
+        glGetStringiFuncType glGetStringiFunc = NULL;
+        glGetStringiFunc = reinterpret_cast<glGetStringiFuncType>(sf::priv::GlContext::getFunction("glGetStringi"));
+
+        if (glGetStringiFunc)
         {
-            // Try to load the >= 3.0 way
-            glGetStringiFuncType glGetStringiFunc = NULL;
-            glGetStringiFunc = reinterpret_cast<glGetStringiFuncType>(sf::priv::GlContext::getFunction("glGetStringi"));
+            int numExtensions = 0;
+            glGetIntegerv(GL_NUM_EXTENSIONS, &numExtensions);
 
-            if (glGetStringiFunc)
+            if (numExtensions)
             {
-                int numExtensions = 0;
-                glGetIntegerv(GL_NUM_EXTENSIONS, &numExtensions);
-
-                if (numExtensions)
+                for (unsigned int i = 0; i < static_cast<unsigned int>(numExtensions); ++i)
                 {
-                    for (unsigned int i = 0; i < static_cast<unsigned int>(numExtensions); ++i)
-                    {
-                        const char* extensionString = reinterpret_cast<const char*>(glGetStringiFunc(GL_EXTENSIONS, i));
+                    const char* extensionString = reinterpret_cast<const char*>(glGetStringiFunc(GL_EXTENSIONS, i));
 
-                        extensions.push_back(extensionString);
-                    }
+                    extensions.push_back(extensionString);
                 }
             }
         }
     }
+
+#endif
+}
 
     // Helper to parse OpenGL version strings
     bool parseVersionString(const char* version, const char* prefix, unsigned int &major, unsigned int &minor)
@@ -681,6 +705,15 @@ void GlContext::initialize(const ContextSettings& requestedSettings)
     setActive(true);
 
     // Retrieve the context version number
+#if defined(SFML_SYSTEM_EMSCRIPTEN)
+
+    // This PoC explicitly creates an OpenGL ES 2 / WebGL 1 context.
+    // GL_MAJOR_VERSION and GL_MINOR_VERSION are not valid WebGL 1 queries.
+    m_settings.majorVersion = 2;
+    m_settings.minorVersion = 0;
+
+#else
+
     int majorVersion = 0;
     int minorVersion = 0;
 
@@ -704,11 +737,6 @@ void GlContext::initialize(const ContextSettings& requestedSettings)
         const char* version = reinterpret_cast<const char*>(glGetString(GL_VERSION));
         if (version)
         {
-            // OpenGL ES Common Lite profile: The beginning of the returned string is "OpenGL ES-CL major.minor"
-            // OpenGL ES Common profile:      The beginning of the returned string is "OpenGL ES-CM major.minor"
-            // OpenGL ES Full profile:        The beginning of the returned string is "OpenGL ES major.minor"
-            // Desktop OpenGL:                The beginning of the returned string is "major.minor"
-
             if (!parseVersionString(version, "OpenGL ES-CL ", m_settings.majorVersion, m_settings.minorVersion) &&
                 !parseVersionString(version, "OpenGL ES-CM ", m_settings.majorVersion, m_settings.minorVersion) &&
                 !parseVersionString(version, "OpenGL ES ",    m_settings.majorVersion, m_settings.minorVersion) &&
@@ -722,6 +750,8 @@ void GlContext::initialize(const ContextSettings& requestedSettings)
             err() << "Unable to retrieve OpenGL version string, defaulting to 1.1" << std::endl;
         }
     }
+
+#endif
 
     // 3.0 contexts only deprecate features, but do not remove them yet
     // 3.1 contexts remove features if ARB_compatibility is not present

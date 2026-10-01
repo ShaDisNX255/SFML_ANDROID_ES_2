@@ -43,148 +43,40 @@ class EglContext : public GlContext
 {
 public:
 
-    ////////////////////////////////////////////////////////////
-    /// \brief Create a new context, not associated to a window
-    ///
-    /// \param shared Context to share the new one with (can be NULL)
-    ///
-    ////////////////////////////////////////////////////////////
     EglContext(EglContext* shared);
-
-    ////////////////////////////////////////////////////////////
-    /// \brief Create a new context attached to a window
-    ///
-    /// \param shared       Context to share the new one with
-    /// \param settings     Creation parameters
-    /// \param owner        Pointer to the owner window
-    /// \param bitsPerPixel Pixel depth, in bits per pixel
-    ///
-    ////////////////////////////////////////////////////////////
     EglContext(EglContext* shared, const ContextSettings& settings, const WindowImpl* owner, unsigned int bitsPerPixel);
-
-    ////////////////////////////////////////////////////////////
-    /// \brief Create a new context that embeds its own rendering target
-    ///
-    /// \param shared   Context to share the new one with
-    /// \param settings Creation parameters
-    /// \param width    Back buffer width, in pixels
-    /// \param height   Back buffer height, in pixels
-    ///
-    ////////////////////////////////////////////////////////////
     EglContext(EglContext* shared, const ContextSettings& settings, unsigned int width, unsigned int height);
-
-    ////////////////////////////////////////////////////////////
-    /// \brief Destructor
-    ///
-    ////////////////////////////////////////////////////////////
     ~EglContext();
 
-    ////////////////////////////////////////////////////////////
-    /// \brief Activate the context as the current target
-    ///        for rendering
-    ///
-    /// \param current Whether to make the context current or no longer current
-    ///
-    /// \return True on success, false if any error happened
-    ///
-    ////////////////////////////////////////////////////////////
     virtual bool makeCurrent(bool current);
-
-    ////////////////////////////////////////////////////////////
-    /// \brief Display what has been rendered to the context so far
-    ///
-    ////////////////////////////////////////////////////////////
     virtual void display();
-
-    ////////////////////////////////////////////////////////////
-    /// \brief Enable or disable vertical synchronization
-    ///
-    /// Activating vertical synchronization will limit the number
-    /// of frames displayed to the refresh rate of the monitor.
-    /// This can avoid some visual artifacts, and limit the framerate
-    /// to a good value (but not constant across different computers).
-    ///
-    /// \param enabled: True to enable v-sync, false to deactivate
-    ///
-    ////////////////////////////////////////////////////////////
     virtual void setVerticalSyncEnabled(bool enabled);
 
-    ////////////////////////////////////////////////////////////
-    /// \brief Create the context
-    ///
-    /// \param shared       Context to share the new one with (can be NULL)
-    /// \param bitsPerPixel Pixel depth, in bits per pixel
-    /// \param settings     Creation parameters
-    ///
-    ////////////////////////////////////////////////////////////
     void createContext(EglContext* shared);
-
-    ////////////////////////////////////////////////////////////
-    /// \brief Create the EGL surface
-    ///
-    /// This function must be called when the activity (re)start, or
-    /// when the orientation change.
-    ///
-    /// \param window: The native window type
-    ///
-    ////////////////////////////////////////////////////////////
     void createSurface(EGLNativeWindowType window);
-
-    ////////////////////////////////////////////////////////////
-    /// \brief Destroy the EGL surface
-    ///
-    /// This function must be called when the activity is stopped, or
-    /// when the orientation change.
-    ///
-    ////////////////////////////////////////////////////////////
     void destroySurface();
 
-    ////////////////////////////////////////////////////////////
-    /// \brief Get the best EGL visual for a given set of video settings
-    ///
-    /// \param display      EGL display
-    /// \param bitsPerPixel Pixel depth, in bits per pixel
-    /// \param settings     Requested context settings
-    ///
-    /// \return The best EGL config
-    ///
-    ////////////////////////////////////////////////////////////
     static EGLConfig getBestConfig(EGLDisplay display, unsigned int bitsPerPixel, const ContextSettings& settings);
 
 #ifdef SFML_SYSTEM_LINUX
-    ////////////////////////////////////////////////////////////
-    /// \brief Select the best EGL visual for a given set of settings
-    ///
-    /// \param display      X display
-    /// \param bitsPerPixel Pixel depth, in bits per pixel
-    /// \param settings     Requested context settings
-    ///
-    /// \return The best visual
-    ///
-    ////////////////////////////////////////////////////////////
     static XVisualInfo selectBestVisual(::Display* display, unsigned int bitsPerPixel, const ContextSettings& settings);
 #endif
 
 private:
 
-    ////////////////////////////////////////////////////////////
-    /// \brief Helper to copy the picked EGL configuration 
-    ////////////////////////////////////////////////////////////
     void updateSettings();
 
-    ////////////////////////////////////////////////////////////
-    // Member data
-    ////////////////////////////////////////////////////////////
-    EGLDisplay  m_display; ///< The internal EGL display
-    EGLContext  m_context; ///< The internal EGL context
-    EGLSurface  m_surface; ///< The internal EGL surface
-    EGLConfig   m_config;  ///< The internal EGL config
+    EGLDisplay  m_display;
+    EGLContext  m_context;
+    EGLSurface  m_surface;
+    EGLConfig   m_config;
 
+    // Emscripten exposes one browser WebGL/EGL context. Wrapper contexts
+    // therefore alias the shared browser context and must not destroy it.
+    bool m_ownsContext;
 };
 
 } // namespace priv
-
 } // namespace sf
-
 
 #endif // SFML_EGLCONTEXT_HPP
