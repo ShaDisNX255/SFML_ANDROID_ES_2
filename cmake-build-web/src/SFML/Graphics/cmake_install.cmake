@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML
+# Install script for directory: C:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -37,11 +37,7 @@ if(NOT DEFINED CMAKE_OBJDUMP)
   set(CMAKE_OBJDUMP "CMAKE_OBJDUMP-NOTFOUND")
 endif()
 
-if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for each subdirectory.
-  include("C:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/cmake-build-web/src/SFML/System/cmake_install.cmake")
-  include("C:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/cmake-build-web/src/SFML/Window/cmake_install.cmake")
-  include("C:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/cmake-build-web/src/SFML/Graphics/cmake_install.cmake")
-
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xdevelx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "C:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/cmake-build-web/lib/libsfml-graphics-s-d.a")
 endif()
 

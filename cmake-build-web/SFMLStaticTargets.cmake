@@ -12,11 +12,15 @@ cmake_policy(VERSION 2.6...3.20)
 # Commands may need to know the format version.
 set(CMAKE_IMPORT_FILE_VERSION 1)
 
+if(CMAKE_VERSION VERSION_LESS 3.0.0)
+  message(FATAL_ERROR "This file relies on consumers using CMake 3.0.0 or greater.")
+endif()
+
 # Protect against multiple inclusion, which would fail when already imported targets are added once more.
 set(_targetsDefined)
 set(_targetsNotDefined)
 set(_expectedTargets)
-foreach(_expectedTarget sfml-system sfml-window)
+foreach(_expectedTarget sfml-system sfml-window sfml-graphics Freetype)
   list(APPEND _expectedTargets ${_expectedTarget})
   if(NOT TARGET ${_expectedTarget})
     list(APPEND _targetsNotDefined ${_expectedTarget})
@@ -57,6 +61,22 @@ set_target_properties(sfml-window PROPERTIES
   INTERFACE_INCLUDE_DIRECTORIES "C:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include"
 )
 
+# Create imported target sfml-graphics
+add_library(sfml-graphics STATIC IMPORTED)
+
+set_target_properties(sfml-graphics PROPERTIES
+  INTERFACE_COMPILE_DEFINITIONS "SFML_STATIC"
+  INTERFACE_INCLUDE_DIRECTORIES "C:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include"
+)
+
+# Create imported target Freetype
+add_library(Freetype INTERFACE IMPORTED)
+
+set_target_properties(Freetype PROPERTIES
+  INTERFACE_INCLUDE_DIRECTORIES "C:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2"
+  INTERFACE_LINK_LIBRARIES "C:/emsdk/upstream/emscripten/cache/sysroot/lib/wasm32-emscripten/libfreetype.a"
+)
+
 # Import target "sfml-system" for configuration "Debug"
 set_property(TARGET sfml-system APPEND PROPERTY IMPORTED_CONFIGURATIONS DEBUG)
 set_target_properties(sfml-system PROPERTIES
@@ -70,6 +90,14 @@ set_target_properties(sfml-window PROPERTIES
   IMPORTED_LINK_INTERFACE_LANGUAGES_DEBUG "CXX"
   IMPORTED_LINK_INTERFACE_LIBRARIES_DEBUG "sfml-system"
   IMPORTED_LOCATION_DEBUG "C:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/cmake-build-web/lib/libsfml-window-s-d.a"
+  )
+
+# Import target "sfml-graphics" for configuration "Debug"
+set_property(TARGET sfml-graphics APPEND PROPERTY IMPORTED_CONFIGURATIONS DEBUG)
+set_target_properties(sfml-graphics PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_DEBUG "CXX"
+  IMPORTED_LINK_INTERFACE_LIBRARIES_DEBUG "sfml-window;Freetype"
+  IMPORTED_LOCATION_DEBUG "C:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/cmake-build-web/lib/libsfml-graphics-s-d.a"
   )
 
 # This file does not depend on other imported targets which have

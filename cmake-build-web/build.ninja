@@ -638,11 +638,338 @@ build src/SFML/Window/CMakeFiles/install/local.util: CUSTOM_COMMAND src/SFML/Win
 build src/SFML/Window/install/local: phony src/SFML/Window/CMakeFiles/install/local.util
 
 # =============================================================================
+# Write statements declared in CMakeLists.txt:
+# C:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target sfml-graphics
+
+
+#############################################
+# Order-only phony target for sfml-graphics
+
+build cmake_object_order_depends_target_sfml-graphics: phony || cmake_object_order_depends_target_sfml-system cmake_object_order_depends_target_sfml-window
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/BlendMode.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/BlendMode.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\BlendMode.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Color.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/Color.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Color.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Font.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/Font.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Font.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Glsl.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/Glsl.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Glsl.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/GLCheck.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/GLCheck.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\GLCheck.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/GLExtensions.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/GLExtensions.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\GLExtensions.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Image.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/Image.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Image.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/ImageLoader.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/ImageLoader.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\ImageLoader.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderStates.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/RenderStates.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\RenderStates.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderTexture.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/RenderTexture.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\RenderTexture.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderTarget.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/RenderTarget.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\RenderTarget.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderWindow.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/RenderWindow.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\RenderWindow.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Shader.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/Shader.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Shader.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Texture.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/Texture.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Texture.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/TextureSaver.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/TextureSaver.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\TextureSaver.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Transform.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/Transform.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Transform.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Transformable.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/Transformable.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Transformable.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/View.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/View.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\View.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Vertex.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/Vertex.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Vertex.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Shape.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/Shape.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Shape.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/CircleShape.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/CircleShape.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\CircleShape.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RectangleShape.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/RectangleShape.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\RectangleShape.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/ConvexShape.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/ConvexShape.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\ConvexShape.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Sprite.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/Sprite.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Sprite.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Text.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/Text.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\Text.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/VertexArray.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/VertexArray.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\VertexArray.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/VertexBuffer.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/VertexBuffer.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\VertexBuffer.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderTextureImpl.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/RenderTextureImpl.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\RenderTextureImpl.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderTextureImplFBO.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/RenderTextureImplFBO.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\RenderTextureImplFBO.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+build src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderTextureImplDefault.o: CXX_COMPILER__sfml-graphics_Debug C$:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src/SFML/Graphics/RenderTextureImplDefault.cpp || cmake_object_order_depends_target_sfml-graphics
+  DEFINES = -DGL_GLEXT_PROTOTYPES -DSFML_OPENGL_ES -DSFML_STATIC -DSTBI_FAILURE_USERMSG
+  DEP_FILE = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir\RenderTextureImplDefault.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/include -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/src -IC:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/extlibs/headers/stb_image -IC:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  OBJECT_FILE_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target sfml-graphics
+
+
+#############################################
+# Link the static library lib\libsfml-graphics-s-d.a
+
+build lib/libsfml-graphics-s-d.a: CXX_STATIC_LIBRARY_LINKER__sfml-graphics_Debug src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/BlendMode.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Color.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Font.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Glsl.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/GLCheck.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/GLExtensions.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Image.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/ImageLoader.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderStates.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderTexture.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderTarget.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderWindow.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Shader.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Texture.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/TextureSaver.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Transform.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Transformable.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/View.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Vertex.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Shape.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/CircleShape.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RectangleShape.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/ConvexShape.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Sprite.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Text.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/VertexArray.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/VertexBuffer.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderTextureImpl.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderTextureImplFBO.o src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderTextureImplDefault.o || lib/libsfml-system-s-d.a lib/libsfml-window-s-d.a
+  LANGUAGE_COMPILE_FLAGS = -g
+  OBJECT_DIR = src\SFML\Graphics\CMakeFiles\sfml-graphics.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = lib\libsfml-graphics-s-d.a
+  TARGET_PDB = sfml-graphics-s-d.a.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build src/SFML/Graphics/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\Administrator\Documents\GitHub\SFML_ANDROID_ES_2\cmake-build-web\src\SFML\Graphics && C:\Users\Administrator\AppData\Local\Android\Sdk\cmake\3.22.1\bin\cmake.exe -E echo "No interactive CMake dialog available.""
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build src/SFML/Graphics/edit_cache: phony src/SFML/Graphics/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build src/SFML/Graphics/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D C:\Users\Administrator\Documents\GitHub\SFML_ANDROID_ES_2\cmake-build-web\src\SFML\Graphics && C:\Users\Administrator\AppData\Local\Android\Sdk\cmake\3.22.1\bin\cmake.exe --regenerate-during-build -SC:\Users\Administrator\Documents\GitHub\SFML_ANDROID_ES_2 -BC:\Users\Administrator\Documents\GitHub\SFML_ANDROID_ES_2\cmake-build-web"
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build src/SFML/Graphics/rebuild_cache: phony src/SFML/Graphics/CMakeFiles/rebuild_cache.util
+
+
+#############################################
+# Utility command for list_install_components
+
+build src/SFML/Graphics/list_install_components: phony
+
+
+#############################################
+# Utility command for install
+
+build src/SFML/Graphics/CMakeFiles/install.util: CUSTOM_COMMAND src/SFML/Graphics/all
+  COMMAND = cmd.exe /C "cd /D C:\Users\Administrator\Documents\GitHub\SFML_ANDROID_ES_2\cmake-build-web\src\SFML\Graphics && C:\Users\Administrator\AppData\Local\Android\Sdk\cmake\3.22.1\bin\cmake.exe -P cmake_install.cmake"
+  DESC = Install the project...
+  pool = console
+  restat = 1
+
+build src/SFML/Graphics/install: phony src/SFML/Graphics/CMakeFiles/install.util
+
+
+#############################################
+# Utility command for install/local
+
+build src/SFML/Graphics/CMakeFiles/install/local.util: CUSTOM_COMMAND src/SFML/Graphics/all
+  COMMAND = cmd.exe /C "cd /D C:\Users\Administrator\Documents\GitHub\SFML_ANDROID_ES_2\cmake-build-web\src\SFML\Graphics && C:\Users\Administrator\AppData\Local\Android\Sdk\cmake\3.22.1\bin\cmake.exe -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake"
+  DESC = Installing only the local directory...
+  pool = console
+  restat = 1
+
+build src/SFML/Graphics/install/local: phony src/SFML/Graphics/CMakeFiles/install/local.util
+
+# =============================================================================
 # Target aliases.
+
+build libsfml-graphics-s-d.a: phony lib/libsfml-graphics-s-d.a
 
 build libsfml-system-s-d.a: phony lib/libsfml-system-s-d.a
 
 build libsfml-window-s-d.a: phony lib/libsfml-window-s-d.a
+
+build sfml-graphics: phony lib/libsfml-graphics-s-d.a
 
 build sfml-system: phony lib/libsfml-system-s-d.a
 
@@ -663,7 +990,14 @@ build all: phony src/SFML/all
 #############################################
 # Folder: C:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/cmake-build-web/src/SFML
 
-build src/SFML/all: phony src/SFML/System/all src/SFML/Window/all
+build src/SFML/all: phony src/SFML/System/all src/SFML/Window/all src/SFML/Graphics/all
+
+# =============================================================================
+
+#############################################
+# Folder: C:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/cmake-build-web/src/SFML/Graphics
+
+build src/SFML/Graphics/all: phony lib/libsfml-graphics-s-d.a
 
 # =============================================================================
 
@@ -691,14 +1025,14 @@ build src/SFML/Window/all: phony lib/libsfml-window-s-d.a
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../cmake/Config.cmake ../cmake/Macros.cmake ../cmake/SFMLConfig.cmake.in ../cmake/SFMLConfigDependencies.cmake.in ../src/SFML/CMakeLists.txt ../src/SFML/System/CMakeLists.txt ../src/SFML/Window/CMakeLists.txt C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/BasicConfigVersion-SameMajorVersion.cmake.in C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCCompiler.cmake.in C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCInformation.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCXXCompiler.cmake.in C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCXXInformation.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineCCompiler.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineCXXCompiler.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineCompiler.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineSystem.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeFindBinUtils.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeGenericSystem.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeNinjaFindMake.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakePackageConfigHelpers.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeParseArguments.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeSystem.cmake.in C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeTestCCompiler.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeTestCXXCompiler.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang-C.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang-CXX.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang-FindBinUtils.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/GNU.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/WriteBasicConfigVersionFile.cmake C$:/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake CMakeCache.txt CMakeFiles/3.22.1-g37088a8-dirty/CMakeCCompiler.cmake CMakeFiles/3.22.1-g37088a8-dirty/CMakeCXXCompiler.cmake CMakeFiles/3.22.1-g37088a8-dirty/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | ../CMakeLists.txt ../cmake/Config.cmake ../cmake/Macros.cmake ../cmake/Modules/FindFreetype.cmake ../cmake/SFMLConfig.cmake.in ../cmake/SFMLConfigDependencies.cmake.in ../src/SFML/CMakeLists.txt ../src/SFML/Graphics/CMakeLists.txt ../src/SFML/System/CMakeLists.txt ../src/SFML/Window/CMakeLists.txt C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/BasicConfigVersion-SameMajorVersion.cmake.in C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCCompiler.cmake.in C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCInformation.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCXXCompiler.cmake.in C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCXXInformation.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineCCompiler.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineCXXCompiler.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineCompiler.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineSystem.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeFindBinUtils.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeGenericSystem.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeNinjaFindMake.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakePackageConfigHelpers.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeParseArguments.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeSystem.cmake.in C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeTestCCompiler.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeTestCXXCompiler.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang-C.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang-CXX.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang-FindBinUtils.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/GNU.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/WriteBasicConfigVersionFile.cmake C$:/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake CMakeCache.txt CMakeFiles/3.22.1-g37088a8-dirty/CMakeCCompiler.cmake CMakeFiles/3.22.1-g37088a8-dirty/CMakeCXXCompiler.cmake CMakeFiles/3.22.1-g37088a8-dirty/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build ../CMakeLists.txt ../cmake/Config.cmake ../cmake/Macros.cmake ../cmake/SFMLConfig.cmake.in ../cmake/SFMLConfigDependencies.cmake.in ../src/SFML/CMakeLists.txt ../src/SFML/System/CMakeLists.txt ../src/SFML/Window/CMakeLists.txt C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/BasicConfigVersion-SameMajorVersion.cmake.in C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCCompiler.cmake.in C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCInformation.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCXXCompiler.cmake.in C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCXXInformation.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineCCompiler.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineCXXCompiler.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineCompiler.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineSystem.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeFindBinUtils.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeGenericSystem.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeNinjaFindMake.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakePackageConfigHelpers.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeParseArguments.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeSystem.cmake.in C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeTestCCompiler.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeTestCXXCompiler.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang-C.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang-CXX.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang-FindBinUtils.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/GNU.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/WriteBasicConfigVersionFile.cmake C$:/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake CMakeCache.txt CMakeFiles/3.22.1-g37088a8-dirty/CMakeCCompiler.cmake CMakeFiles/3.22.1-g37088a8-dirty/CMakeCXXCompiler.cmake CMakeFiles/3.22.1-g37088a8-dirty/CMakeSystem.cmake: phony
+build ../CMakeLists.txt ../cmake/Config.cmake ../cmake/Macros.cmake ../cmake/Modules/FindFreetype.cmake ../cmake/SFMLConfig.cmake.in ../cmake/SFMLConfigDependencies.cmake.in ../src/SFML/CMakeLists.txt ../src/SFML/Graphics/CMakeLists.txt ../src/SFML/System/CMakeLists.txt ../src/SFML/Window/CMakeLists.txt C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/BasicConfigVersion-SameMajorVersion.cmake.in C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCCompiler.cmake.in C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCInformation.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCXXCompiler.cmake.in C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCXXInformation.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeCommonLanguageInclude.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineCCompiler.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineCXXCompiler.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineCompiler.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeDetermineSystem.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeFindBinUtils.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeGenericSystem.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeInitializeConfigs.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeLanguageInformation.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeNinjaFindMake.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakePackageConfigHelpers.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeParseArguments.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeSystem.cmake.in C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeSystemSpecificInformation.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeSystemSpecificInitialize.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeTestCCompiler.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/CMakeTestCXXCompiler.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang-C.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang-CXX.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang-FindBinUtils.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/Clang.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/Compiler/GNU.cmake C$:/Users/Administrator/AppData/Local/Android/Sdk/cmake/3.22.1/share/cmake-3.22/Modules/WriteBasicConfigVersionFile.cmake C$:/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake CMakeCache.txt CMakeFiles/3.22.1-g37088a8-dirty/CMakeCCompiler.cmake CMakeFiles/3.22.1-g37088a8-dirty/CMakeCXXCompiler.cmake CMakeFiles/3.22.1-g37088a8-dirty/CMakeSystem.cmake: phony
 
 
 #############################################

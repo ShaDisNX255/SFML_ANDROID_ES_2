@@ -16,7 +16,7 @@ set(CMAKE_IMPORT_FILE_VERSION 1)
 set(_targetsDefined)
 set(_targetsNotDefined)
 set(_expectedTargets)
-foreach(_expectedTarget sfml-system sfml-window)
+foreach(_expectedTarget sfml-system sfml-window sfml-graphics Freetype)
   list(APPEND _expectedTargets ${_expectedTarget})
   if(NOT TARGET ${_expectedTarget})
     list(APPEND _targetsNotDefined ${_expectedTarget})
@@ -65,6 +65,21 @@ set_target_properties(sfml-window PROPERTIES
   INTERFACE_COMPILE_DEFINITIONS "SFML_STATIC"
   INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
 )
+
+# Create imported target sfml-graphics
+add_library(sfml-graphics STATIC IMPORTED)
+
+set_target_properties(sfml-graphics PROPERTIES
+  INTERFACE_COMPILE_DEFINITIONS "SFML_STATIC"
+  INTERFACE_INCLUDE_DIRECTORIES "${_IMPORT_PREFIX}/include"
+)
+
+# Create imported target Freetype
+add_library(Freetype INTERFACE IMPORTED)
+
+if(CMAKE_VERSION VERSION_LESS 3.0.0)
+  message(FATAL_ERROR "This file relies on consumers using CMake 3.0.0 or greater.")
+endif()
 
 # Load information for each installed configuration.
 get_filename_component(_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)

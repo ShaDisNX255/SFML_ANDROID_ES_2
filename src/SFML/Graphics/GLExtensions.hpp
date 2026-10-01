@@ -154,18 +154,24 @@
     // The following extensions are optional.
 
     // Core since 2.0 - OES_blend_func_separate
-    #ifdef SFML_SYSTEM_ANDROID
+    #if defined(SFML_SYSTEM_ANDROID)
         // Hack to make transparency working on some Android devices
         #define GLEXT_blend_func_separate                 false
+    #elif defined(SFML_SYSTEM_EMSCRIPTEN)
+        // glBlendFuncSeparate is core in GLES2 / WebGL 1.
+        #define GLEXT_blend_func_separate                 true
     #else
         #define GLEXT_blend_func_separate                 GL_OES_blend_func_separate
     #endif
     #define GLEXT_glBlendFuncSeparate                 glBlendFuncSeparate
 
     // Core since 2.0 - OES_blend_equation_separate
-    #ifdef SFML_SYSTEM_ANDROID
+    #if defined(SFML_SYSTEM_ANDROID)
         // Hack to make transparency working on some Android devices
         #define GLEXT_blend_equation_separate             false
+    #elif defined(SFML_SYSTEM_EMSCRIPTEN)
+        // glBlendEquationSeparate is core in GLES2 / WebGL 1.
+        #define GLEXT_blend_equation_separate             true
     #else
         #define GLEXT_blend_equation_separate             GL_OES_blend_equation_separate
     #endif

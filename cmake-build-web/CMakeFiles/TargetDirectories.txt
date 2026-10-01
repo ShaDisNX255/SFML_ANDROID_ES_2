@@ -20,3 +20,9 @@ C:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/cmake-build-web/src/SF
 C:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/cmake-build-web/src/SFML/Window/CMakeFiles/list_install_components.dir
 C:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/cmake-build-web/src/SFML/Window/CMakeFiles/install.dir
 C:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/cmake-build-web/src/SFML/Window/CMakeFiles/install/local.dir
+C:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/cmake-build-web/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir
+C:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/cmake-build-web/src/SFML/Graphics/CMakeFiles/edit_cache.dir
+C:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/cmake-build-web/src/SFML/Graphics/CMakeFiles/rebuild_cache.dir
+C:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/cmake-build-web/src/SFML/Graphics/CMakeFiles/list_install_components.dir
+C:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/cmake-build-web/src/SFML/Graphics/CMakeFiles/install.dir
+C:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2/cmake-build-web/src/SFML/Graphics/CMakeFiles/install/local.dir

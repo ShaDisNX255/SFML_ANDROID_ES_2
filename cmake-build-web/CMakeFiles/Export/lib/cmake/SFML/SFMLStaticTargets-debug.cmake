@@ -26,5 +26,16 @@ set_target_properties(sfml-window PROPERTIES
 list(APPEND _IMPORT_CHECK_TARGETS sfml-window )
 list(APPEND _IMPORT_CHECK_FILES_FOR_sfml-window "${_IMPORT_PREFIX}/lib/libsfml-window-s-d.a" )
 
+# Import target "sfml-graphics" for configuration "Debug"
+set_property(TARGET sfml-graphics APPEND PROPERTY IMPORTED_CONFIGURATIONS DEBUG)
+set_target_properties(sfml-graphics PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_DEBUG "CXX"
+  IMPORTED_LINK_INTERFACE_LIBRARIES_DEBUG "sfml-window;Freetype"
+  IMPORTED_LOCATION_DEBUG "${_IMPORT_PREFIX}/lib/libsfml-graphics-s-d.a"
+  )
+
+list(APPEND _IMPORT_CHECK_TARGETS sfml-graphics )
+list(APPEND _IMPORT_CHECK_FILES_FOR_sfml-graphics "${_IMPORT_PREFIX}/lib/libsfml-graphics-s-d.a" )
+
 # Commands beyond this point should not need to know the version.
 set(CMAKE_IMPORT_FILE_VERSION)

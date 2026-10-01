@@ -204,6 +204,15 @@ EMSCRIPTEN_GENERATE_BITCODE_STATIC_LIBRARIES:BOOL=OFF
 //Single output directory for building all executables.
 EXECUTABLE_OUTPUT_PATH:PATH=
 
+//Path to a file.
+FREETYPE_INCLUDE_DIR_freetype2:PATH=C:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+
+//Path to a file.
+FREETYPE_INCLUDE_DIR_ft2build:PATH=C:/emsdk/upstream/emscripten/cache/sysroot/include/freetype2
+
+//Path to a library.
+FREETYPE_LIBRARY:FILEPATH=C:/emsdk/upstream/emscripten/cache/sysroot/lib/wasm32-emscripten/libfreetype.a
+
 //Single output directory for building all libraries.
 LIBRARY_OUTPUT_PATH:PATH=
 
@@ -220,7 +229,7 @@ SFML_BUILD_DOC:BOOL=FALSE
 SFML_BUILD_EXAMPLES:BOOL=OFF
 
 //TRUE to build SFML's Graphics module.
-SFML_BUILD_GRAPHICS:BOOL=OFF
+SFML_BUILD_GRAPHICS:BOOL=ON
 
 //TRUE to build SFML's Network module.
 SFML_BUILD_NETWORK:BOOL=OFF
@@ -252,6 +261,9 @@ SFML_SOURCE_DIR:STATIC=C:/Users/Administrator/Documents/GitHub/SFML_ANDROID_ES_2
 
 //TRUE to use system dependencies, FALSE to use the bundled ones.
 SFML_USE_SYSTEM_DEPS:BOOL=FALSE
+
+//Dependencies for the target
+sfml-graphics_LIB_DEPENDS:STATIC=general;sfml-window;
 
 //Dependencies for the target
 sfml-window_LIB_DEPENDS:STATIC=general;sfml-system;
@@ -339,7 +351,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO
 CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=4
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=5
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -378,4 +390,10 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 CMAKE_STRIP-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: FREETYPE_INCLUDE_DIR_freetype2
+FREETYPE_INCLUDE_DIR_freetype2-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: FREETYPE_INCLUDE_DIR_ft2build
+FREETYPE_INCLUDE_DIR_ft2build-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: FREETYPE_LIBRARY
+FREETYPE_LIBRARY-ADVANCED:INTERNAL=1
 
